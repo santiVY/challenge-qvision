@@ -1,149 +1,155 @@
-# Bon-Bonite Automation Framework
+# Framework de Automatización Bon-Bonite
 
-Professional QA automation framework for the Bon-Bonite e-commerce website, built as a technical challenge for QVision.
+Framework profesional de automatización de pruebas QA para el sitio web de comercio electrónico Bon-Bonite, desarrollado como desafío técnico para QVision.
 
-## Objective
+## Objetivo
 
-This project implements a robust, maintainable, and scalable test automation framework using industry best practices and modern technologies. The framework follows the Screenplay Pattern and integrates Cucumber for behavior-driven testing.
+Este proyecto implementa un framework de automatización de pruebas robusto, mantenible y escalable, utilizando buenas prácticas de la industria y tecnologías modernas. El framework sigue el patrón **Screenplay** e integra **Cucumber** para realizar pruebas orientadas al comportamiento (BDD).
 
-## Technologies Used
+## Tecnologías utilizadas
 
-- **Java 21+** - Programming language
-- **Gradle** - Build automation tool
-- **Serenity BDD 4.2.0** - Testing framework with Screenplay Pattern
-- **Cucumber 7.18.0** - Behavior-Driven Development (BDD)
-- **JUnit 5** - Test execution framework
-- **Selenium WebDriver 4.23.1** - Browser automation
-- **Google Chrome** - Target browser
-- **WebDriverManager 5.8.0** - WebDriver management
-- **AssertJ** - Fluent assertions
+* **Java 21+** - Lenguaje de programación
+* **Gradle** - Herramienta de automatización de compilación
+* **Serenity BDD 4.2.0** - Framework de pruebas con patrón Screenplay
+* **Cucumber 7.18.0** - Desarrollo orientado al comportamiento (BDD)
+* **JUnit 5** - Framework para la ejecución de pruebas
+* **Selenium WebDriver 4.23.1** - Automatización del navegador
+* **Google Chrome** - Navegador objetivo
+* **WebDriverManager 5.8.0** - Gestión de WebDriver
+* **AssertJ** - Aserciones fluidas
 
-## Architecture
+## Arquitectura
 
-The framework follows the **Screenplay Pattern** as the primary design pattern, which promotes:
+El framework utiliza **Screenplay Pattern** como patrón principal de diseño, promoviendo:
 
-- **Actors** - Represent users performing actions in the system
-- **Abilities** - Capabilities that actors possess (e.g., BrowseTheWeb)
-- **Tasks** - High-level business actions performed by actors
-- **Interactions** - Low-level UI interactions
-- **Questions** - Queries to verify system state
+* **Actors (Actores)** - Representan a los usuarios que realizan acciones en el sistema
+* **Abilities (Habilidades)** - Capacidades que poseen los actores, por ejemplo, `BrowseTheWeb`
+* **Tasks (Tareas)** - Acciones de alto nivel relacionadas con el negocio realizadas por los actores
+* **Interactions (Interacciones)** - Interacciones de bajo nivel con la interfaz de usuario
+* **Questions (Preguntas)** - Consultas utilizadas para verificar el estado del sistema
 
-### Cucumber Integration
+### Integración con Cucumber
 
-Cucumber provides the behavior layer:
-- **Feature files** - Define test scenarios in Gherkin language
-- **Step Definitions** - Connect Gherkin steps to Screenplay implementation
-- **Tags** - Organize and filter test scenarios
+Cucumber proporciona la capa de comportamiento:
 
-## Project Structure
+* **Feature files** - Definen los escenarios de prueba utilizando el lenguaje Gherkin
+* **Step Definitions** - Conectan los pasos de Gherkin con la implementación de Screenplay
+* **Tags** - Permiten organizar y filtrar los escenarios de prueba
 
-```
+## Estructura del proyecto
+
+```text
 src
 └── test
     ├── java
     │   └── com.qvision.bonbonite
-    │       ├── runners              # JUnit 5 test runners
-    │       ├── stepdefinitions      # Cucumber step definitions
-    │       ├── tasks                # Screenplay tasks
-    │       ├── interactions         # Screenplay interactions
-    │       ├── questions            # Screenplay questions
-    │       ├── ui                   # Page objects (UI locators)
-    │       ├── models               # Data models
-    │       ├── abilities            # Custom abilities
-    │       └── utils                # Utility classes
+    │       ├── runners              # Ejecutores de pruebas con JUnit 5
+    │       ├── stepdefinitions      # Definiciones de pasos de Cucumber
+    │       ├── tasks                # Tareas de Screenplay
+    │       ├── interactions         # Interacciones de Screenplay
+    │       ├── questions            # Preguntas de Screenplay
+    │       ├── ui                   # Page Objects (localizadores de UI)
+    │       ├── models               # Modelos de datos
+    │       ├── abilities            # Habilidades personalizadas
+    │       └── utils                # Clases utilitarias
     └── resources
         ├── features
-        │   └── smoke                # Feature files by category
-        ├── serenity.conf            # Serenity configuration
-        └── logback-test.xml         # Logging configuration
+        │   └── smoke                # Archivos Feature organizados por categoría
+        ├── serenity.conf            # Configuración de Serenity
+        └── logback-test.xml         # Configuración de logs
 ```
 
-## Requirements
+## Requisitos
 
-- Java 21 or higher
-- Google Chrome browser
-- Gradle (included via wrapper)
+* Java 21 o superior
+* Navegador Google Chrome
+* Gradle (incluido mediante el Gradle Wrapper)
 
-## Installation and Configuration
+## Instalación y configuración
 
-1. Clone the repository
-2. Navigate to the project directory
-3. The project uses the Gradle wrapper, no additional installation needed
+1. Clonar el repositorio.
+2. Navegar hasta el directorio del proyecto.
+3. El proyecto utiliza Gradle Wrapper, por lo que no es necesario realizar una instalación adicional de Gradle.
 
-## Running Tests
+## Ejecución de las pruebas
 
-### Run all tests
+### Ejecutar todas las pruebas
+
 ```bash
 ./gradlew clean test
 ```
 
-On Windows:
+En Windows:
+
 ```bash
 gradlew.bat clean test
 ```
 
-### Run only smoke tests
+### Ejecutar únicamente las pruebas Smoke
+
 ```bash
 ./gradlew clean test --tests SmokeTestRunner
 ```
 
-On Windows:
+En Windows:
+
 ```bash
 gradlew.bat clean test --tests SmokeTestRunner
 ```
 
-## Serenity Report Location
+## Ubicación del reporte de Serenity
 
-After test execution, the Serenity BDD report is generated at:
+Después de ejecutar las pruebas, el reporte de Serenity BDD se genera en:
 
-```
+```text
 build/serenity/index.html
 ```
 
-Open this file in a browser to view the detailed test report with screenshots and execution logs.
+Abre este archivo en un navegador para visualizar el reporte detallado de las pruebas, incluyendo capturas de pantalla y logs de ejecución.
 
-## Example Feature (Gherkin)
+## Ejemplo de Feature (Gherkin)
 
 ```gherkin
 @smoke
-Feature: Smoke test Bon-Bonite
+Feature: Prueba Smoke de Bon-Bonite
 
-  Scenario: Validate that the Bon-Bonite home page loads correctly
-    Given that the user is on the Bon-Bonite home page
-    Then the user should see the home page loaded correctly
+  Scenario: Validar que la página de inicio de Bon-Bonite cargue correctamente
+    Given que el usuario se encuentra en la página de inicio de Bon-Bonite
+    Then el usuario debería visualizar correctamente la página de inicio
 ```
 
-## Screenplay and Cucumber Integration
+## Integración de Screenplay y Cucumber
 
-The framework integrates Cucumber with Screenplay Pattern as follows:
+El framework integra Cucumber con el patrón Screenplay de la siguiente manera:
 
-1. **Cucumber Feature** - Defines the behavior in business language
-2. **Step Definitions** - Translate Gherkin steps into Screenplay actions
-3. **Screenplay Tasks** - Implement business logic using actors
-4. **Screenplay Questions** - Verify system state using actors
-5. **UI Page Objects** - Define web element locators
+1. **Cucumber Feature** - Define el comportamiento utilizando lenguaje de negocio.
+2. **Step Definitions** - Traducen los pasos de Gherkin en acciones de Screenplay.
+3. **Screenplay Tasks** - Implementan la lógica de negocio utilizando actores.
+4. **Screenplay Questions** - Verifican el estado del sistema mediante los actores.
+5. **UI Page Objects** - Definen los localizadores de los elementos web.
 
-This separation ensures:
-- Test scenarios remain readable and maintainable
-- Business logic is reusable across different scenarios
-- UI changes are isolated to page objects
-- Test code follows SOLID principles
+Esta separación garantiza que:
 
-## Future Scenarios
+* Los escenarios de prueba sean fáciles de leer y mantener.
+* La lógica de negocio sea reutilizable en diferentes escenarios.
+* Los cambios en la interfaz de usuario estén aislados en los Page Objects.
+* El código de pruebas siga los principios SOLID.
 
-The framework is designed to support the following functional scenarios (to be implemented):
+## Escenarios futuros
 
-1. User registration
-2. User data modification
-3. Product purchase flow
+El framework está diseñado para soportar los siguientes escenarios funcionales, que serán implementados posteriormente:
 
-## Best Practices Applied
+1. Registro de usuario
+2. Modificación de datos del usuario
+3. Flujo de compra de productos
 
-- **SOLID principles** where applicable
-- **Separation of concerns** - UI, business logic, and test definitions are separated
-- **Screenplay Pattern** - Actor-based design for better test reusability
-- **DRY (Don't Repeat Yourself)** - Reusable tasks and questions
-- **Clean code** - Descriptive naming and clear structure
-- **No Thread.sleep()** - Uses Serenity's built-in wait mechanisms
-- **Robust selectors** - Prefers id, name, data-testid over fragile XPaths
-- **Centralized configuration** - All settings in serenity.conf
+## Buenas prácticas aplicadas
+
+* **Principios SOLID** cuando son aplicables.
+* **Separación de responsabilidades** - La interfaz de usuario, la lógica de negocio y las definiciones de pruebas están separadas.
+* **Screenplay Pattern** - Diseño basado en actores para mejorar la reutilización de las pruebas.
+* **DRY (Don't Repeat Yourself)** - Tareas y preguntas reutilizables.
+* **Clean Code** - Nombres descriptivos y estructura clara.
+* **Sin `Thread.sleep()`** - Se utilizan los mecanismos de espera integrados de Serenity.
+* **Selectores robustos** - Se priorizan `id`, `name` y `data-testid` sobre XPath frágiles.
+* **Configuración centralizada** - Todos los ajustes se encuentran en `serenity.conf`.

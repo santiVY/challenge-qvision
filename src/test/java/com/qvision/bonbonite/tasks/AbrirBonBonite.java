@@ -4,12 +4,12 @@ import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.actions.Open;
 
-public class OpenBonBonite implements Task {
+public class AbrirBonBonite implements Task {
 
     private static final String URL = "https://www.bon-bonite.com/";
 
-    public static OpenBonBonite homePage() {
-        return new OpenBonBonite();
+    public static AbrirBonBonite isPaginaPrincipal() {
+        return new AbrirBonBonite();
     }
 
     @Override
