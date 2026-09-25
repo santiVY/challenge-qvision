@@ -13,7 +13,7 @@ public class PaginaLogin {
             Target.the("campo correo de login").located(By.id("username"));
 
     public static final Target CAMPO_PASSWORD =
-            Target.the("campo contraseña de login").located(By.id("password"));
+            Target.the("campo contraseña de login").located(By.name("password"));
 
     public static final Target BOTON_INICIAR_SESION =
             Target.the("botón iniciar sesión").located(By.name("login"));

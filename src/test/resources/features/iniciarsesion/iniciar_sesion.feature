@@ -10,5 +10,8 @@ Feature: Compra de un producto en Bon-Bonite
   @login @smoke
   Scenario: Login exitoso del cliente
     When el usuario ingresas sus credenciales
+      | campo    | valor      |
+      | cedula   | 1216765765 |
+      | password | 123456789  |
     Then el usuario vera el menu de inicio con su nombre de usuario
 
