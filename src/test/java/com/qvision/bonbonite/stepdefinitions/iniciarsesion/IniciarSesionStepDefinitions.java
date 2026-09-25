@@ -1,6 +1,5 @@
 package com.qvision.bonbonite.stepdefinitions.iniciarsesion;
 import com.qvision.bonbonite.models.DatosInicioSesion;
-import com.qvision.bonbonite.models.DatosRegistro;
 import com.qvision.bonbonite.questions.registro.RegistroExitoso;
 import com.qvision.bonbonite.tasks.iniciarsesion.IniciarSesion;
 import io.cucumber.datatable.DataTable;

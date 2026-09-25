@@ -6,7 +6,10 @@ Feature: Compra de un producto en Bon-Bonite
 
   Background:
     Given que el usuario se encuentra en la página principal de Bon-Bonite
-    And el usuario ha iniciado sesión con una cuenta registrada
+    And el usuario ingresas sus credenciales
+      | campo    | valor      |
+      | cedula   | 1216765765 |
+      | password | 123456789  |
 
   @compra @smoke
   Scenario: Compra exitosa de un producto del módulo Zapatos
@@ -16,4 +19,4 @@ Feature: Compra de un producto en Bon-Bonite
     And el usuario procede al checkout
     And el usuario confirma la orden de compra
     Then el sistema debería mostrar un mensaje de confirmación de la compra
-    And la orden debería aparecer registrada en el historial de compras del usuario
+

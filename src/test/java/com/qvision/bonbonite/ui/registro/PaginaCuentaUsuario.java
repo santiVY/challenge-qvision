@@ -1,7 +1,6 @@
 package com.qvision.bonbonite.ui.registro;
 
 import net.serenitybdd.screenplay.targets.Target;
-import org.openqa.selenium.By;
 
 /**
  * Localizadores del formulario de registro de Bon-Bonite.

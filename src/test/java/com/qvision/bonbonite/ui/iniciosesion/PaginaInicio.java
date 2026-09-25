@@ -1,4 +1,4 @@
-package com.qvision.bonbonite.ui.registro;
+package com.qvision.bonbonite.ui.iniciosesion;
 
 import net.serenitybdd.screenplay.targets.Target;
 import org.openqa.selenium.By;

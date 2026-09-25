@@ -1,8 +1,8 @@
 package com.qvision.bonbonite.tasks.iniciarsesion;
 
 import com.qvision.bonbonite.models.DatosInicioSesion;
-import com.qvision.bonbonite.ui.registro.PaginaInicio;
-import com.qvision.bonbonite.ui.registro.PaginaLogin;
+import com.qvision.bonbonite.ui.iniciosesion.PaginaInicio;
+import com.qvision.bonbonite.ui.iniciosesion.PaginaLogin;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.actions.Click;

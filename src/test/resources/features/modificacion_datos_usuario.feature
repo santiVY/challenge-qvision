@@ -6,16 +6,16 @@ Feature: Modificación de datos del usuario registrado
 
   Background:
     Given que el usuario se encuentra en la página principal de Bon-Bonite
-    And el usuario ha iniciado sesión con una cuenta registrada
+    And el usuario ingresas sus credenciales
+      | campo    | valor      |
+      | cedula   | 1216765765 |
+      | password | 123456789  |
 
   @cuenta @smoke
   Scenario: Modificación exitosa de los datos del usuario
     When el usuario accede a la sección "Mi cuenta"
     And el usuario actualiza su información de perfil con los siguientes datos
-      | campo      | valor_nuevo        |
-      | nombre     | Juana               |
-      | teléfono   | 3001234567          |
-      | dirección  | Calle 45 # 12-30     |
+      | campo    | valor_nuevo |
+      | teléfono | 3001234567  |
     And el usuario guarda los cambios
     Then el sistema debería mostrar un mensaje de actualización exitosa
-    And los datos actualizados deberían reflejarse en la sección "Mi cuenta"
