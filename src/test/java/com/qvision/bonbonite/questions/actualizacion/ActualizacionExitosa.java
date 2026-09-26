@@ -20,6 +20,6 @@ public class ActualizacionExitosa implements Question<Boolean> {
         );
         
         String mensaje = Text.of(PaginaActualizarDatos.MENSAJE_ACTUALICACION_EXITOSA).answeredBy(actor);
-        return mensaje.toLowerCase().contains("exitosa") || mensaje.toLowerCase().contains("actualizado");
+        return mensaje.toLowerCase().contains("actualizado");
     }
 }
