@@ -26,7 +26,6 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
-      # Opción limpia: instala Chrome y su ChromeDriver compatible automáticamente
       - name: Set up Chrome
         uses: browser-actions/setup-chrome@v1
 
