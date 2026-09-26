@@ -26,19 +26,17 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
-      - name: Set up Chrome
-        uses: browser-actions/setup-chrome@v1
-
-      - name: Set up ChromeDriver
-        uses: nanasess/setup-chromedriver@v2
+      - name: Install Chrome and ChromeDriver
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y chromium-browser chromium-chromedriver
+          sudo ln -s /usr/bin/chromium-browser /usr/bin/google-chrome
 
       - name: Run tests
         run: >
           ./gradlew test 
           -Dheadless.mode=true 
           -Dwebdriver.driver=chrome 
-          -Dwebdriver.autodownload=false 
-          -Dwebdriver.chrome.driver=/usr/local/bin/chromedriver
           -Dchrome.switches="--headless=new,--no-sandbox,--disable-dev-shm-usage,--disable-gpu"
 
       - name: Upload test results
