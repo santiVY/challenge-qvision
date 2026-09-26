@@ -2,6 +2,7 @@ package com.qvision.bonbonite.stepdefinitions.actualizacion;
 
 import com.qvision.bonbonite.models.DatosActualizacion;
 import com.qvision.bonbonite.questions.actualizacion.ActualizacionExitosa;
+import com.qvision.bonbonite.questions.actualizacion.TelefonoActualizado;
 import com.qvision.bonbonite.tasks.actualizacion.AccederASeccionDatos;
 import com.qvision.bonbonite.tasks.actualizacion.ActualizarInformacionPerfil;
 import com.qvision.bonbonite.tasks.actualizacion.GuardarCambios;
@@ -14,9 +15,12 @@ import net.serenitybdd.screenplay.actors.OnStage;
 
 import java.util.Map;
 
+import static org.hamcrest.Matchers.equalTo;
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
 
 public class ActualizarDatosStepDefinitions {
+
+    private String telefonoActualizado;
 
     @When("el usuario accede a la seccion datos")
     public void elUsuarioAccedeALaSeccionDatos() {
@@ -33,6 +37,8 @@ public class ActualizarDatosStepDefinitions {
         if (telefono != null && telefono.equals("DINAMICO")) {
             telefono = GeneradorDatosUnicos.generarTelefono();
         }
+        
+        this.telefonoActualizado = telefono;
         
         DatosActualizacion datos = new DatosActualizacion(telefono);
         
@@ -52,7 +58,9 @@ public class ActualizarDatosStepDefinitions {
     public void elSistemaDeberíaMostrarUnMensajeDeActualizaciónExitosa() {
         OnStage.theActorInTheSpotlight().should(
                 seeThat("La actualización del perfil fue exitosa",
-                        ActualizacionExitosa.delPerfil())
+                        ActualizacionExitosa.delPerfil()),
+                seeThat("El teléfono actualizado coincide con el ingresado",
+                        TelefonoActualizado.enElPerfil(), equalTo(telefonoActualizado))
         );
     }
 }

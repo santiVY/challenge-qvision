@@ -108,6 +108,12 @@ En Windows:
 gradlew.bat clean test
 ```
 
+### Ejecutar todas las pruebas
+
+```bash
+./gradlew clean test --tests "*AllTestsSuite"
+```
+
 ### Ejecutar pruebas específicas por módulo
 
 **Pruebas de compra:**
