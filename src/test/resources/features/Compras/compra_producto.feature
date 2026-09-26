@@ -14,9 +14,14 @@ Feature: Compra de un producto en Bon-Bonite
   @compra @smoke
   Scenario: Compra exitosa de un producto del módulo Zapatos
     When el usuario navega al módulo "Zapatos"
-    And el usuario selecciona un producto disponible
-    And el usuario agrega el producto al carrito de compras
-    And el usuario procede al checkout
-    And el usuario confirma la orden de compra
-    Then el sistema debería mostrar un mensaje de confirmación de la compra
+    And el usuario realiza la compra de un producto disponible
+      | campo        | valor          |
+      | talla        | 34             |
+      | genero       | Mujer          |
+      | telefono     | 3509003456     |
+      | pais         | Colombia       |
+      | departamento | Antioquia      |
+      | ciudad       | Medellín       |
+      | direccion    | cr 94 # 108-23 |
+    Then el sistema debería ver la pasarela de pagos activa para la compra
 
