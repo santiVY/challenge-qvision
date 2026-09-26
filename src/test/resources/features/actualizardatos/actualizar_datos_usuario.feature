@@ -13,9 +13,9 @@ Feature: Modificación de datos del usuario registrado
 
   @cuenta @smoke
   Scenario: Modificación exitosa de los datos del usuario
-    When el usuario accede a la sección "Mi cuenta"
+    When el usuario accede a la seccion datos
     And el usuario actualiza su información de perfil con los siguientes datos
       | campo    | valor_nuevo |
-      | teléfono | 3001234567  |
+      | teléfono | DINAMICO    |
     And el usuario guarda los cambios
     Then el sistema debería mostrar un mensaje de actualización exitosa

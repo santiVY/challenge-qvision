@@ -44,17 +44,40 @@ src
     ├── java
     │   └── com.qvision.bonbonite
     │       ├── runners              # Ejecutores de pruebas con JUnit 5
+    │       │   ├── compra           # Runner para tests de compra
+    │       │   ├── actualizacion    # Runner para tests de actualización de datos
+    │       │   ├── iniciarsesion    # Runner para tests de inicio de sesión
+    │       │   └── registro         # Runner para tests de registro
     │       ├── stepdefinitions      # Definiciones de pasos de Cucumber
+    │       │   ├── compra           # Steps para flujo de compra
+    │       │   ├── actualizacion    # Steps para actualización de datos
+    │       │   ├── iniciarsesion    # Steps para inicio de sesión
+    │       │   └── registro         # Steps para registro
     │       ├── tasks                # Tareas de Screenplay
-    │       ├── interactions         # Interacciones de Screenplay
+    │       │   ├── compra           # Tasks para flujo de compra
+    │       │   ├── actualizacion    # Tasks para actualización de datos
+    │       │   ├── iniciarsesion    # Tasks para inicio de sesión
+    │       │   └── registro         # Tasks para registro
     │       ├── questions            # Preguntas de Screenplay
+    │       │   ├── compra           # Questions para validación de compra
+    │       │   └── actualizacion    # Questions para validación de actualización
     │       ├── ui                   # Page Objects (localizadores de UI)
+    │       │   ├── compra           # Page objects para flujo de compra
+    │       │   ├── actualizacion    # Page objects para actualización de datos
+    │       │   ├── iniciosesion     # Page objects para inicio de sesión
+    │       │   └── registro         # Page objects para registro
     │       ├── models               # Modelos de datos
-    │       ├── abilities            # Habilidades personalizadas
+    │       │   ├── DatosCompra      # Modelo para datos de compra
+    │       │   ├── DatosActualizacion # Modelo para datos de actualización
+    │       │   ├── DatosInicioSesion # Modelo para credenciales
+    │       │   └── DatosRegistro    # Modelo para registro de usuario
     │       └── utils                # Clases utilitarias
+    │           └── GeneradorDatosUnicos # Generador de datos dinámicos
     └── resources
         ├── features
-        │   └── smoke                # Archivos Feature organizados por categoría
+        │   ├── compra_producto.feature        # Feature para flujo de compra
+        │   └── actualizardatos
+        │       └── actualizar_datos_usuario.feature # Feature para actualización de datos
         ├── serenity.conf            # Configuración de Serenity
         └── logback-test.xml         # Configuración de logs
 ```
@@ -85,17 +108,35 @@ En Windows:
 gradlew.bat clean test
 ```
 
-### Ejecutar únicamente las pruebas Smoke
+### Ejecutar todas las pruebas
 
 ```bash
-./gradlew clean test --tests SmokeTestRunner
+./gradlew clean test --tests "*AllTestsSuite"
 ```
 
-En Windows:
+### Ejecutar pruebas específicas por módulo
 
+**Pruebas de compra:**
 ```bash
-gradlew.bat clean test --tests SmokeTestRunner
+./gradlew clean test --tests "*CompraTestSuite"
 ```
+
+**Pruebas de actualización de datos:**
+```bash
+./gradlew clean test --tests "*ActualizarDatosTestSuite"
+```
+
+**Pruebas de inicio de sesión:**
+```bash
+./gradlew clean test --tests "*IniciarSesionTestSuite"
+```
+
+**Pruebas de registro:**
+```bash
+./gradlew clean test --tests "*RegistroTestSuite"
+```
+
+En Windows, reemplazar `./gradlew` por `gradlew.bat`.
 
 ## Ubicación del reporte de Serenity
 
@@ -135,13 +176,28 @@ Esta separación garantiza que:
 * Los cambios en la interfaz de usuario estén aislados en los Page Objects.
 * El código de pruebas siga los principios SOLID.
 
-## Escenarios futuros
+## Escenarios implementados
 
-El framework está diseñado para soportar los siguientes escenarios funcionales, que serán implementados posteriormente:
+El framework actualmente soporta los siguientes escenarios funcionales:
 
-1. Registro de usuario
-2. Modificación de datos del usuario
-3. Flujo de compra de productos
+1. **Registro de usuario** - Validación del proceso de registro con datos únicos generados dinámicamente
+2. **Inicio de sesión** - Autenticación de usuarios con credenciales válidas
+3. **Modificación de datos del usuario** - Actualización de información del perfil (ej. teléfono)
+4. **Flujo de compra de productos** - Proceso completo de compra desde selección hasta pasarela de pagos
+
+## Integración con GitHub Actions
+
+El proyecto incluye un workflow de GitHub Actions que ejecuta automáticamente las pruebas cuando:
+- Se hace push a la rama `main`
+- Se crea un pull request hacia la rama `main`
+
+El workflow:
+- Configura Java 21
+- Ejecuta todas las pruebas con Gradle
+- Ejecuta Selenium en modo headless
+- Genera y sube los reportes de Serenity como artefactos
+
+Configuración ubicada en: `.github/workflows/test.yml`
 
 ## Buenas prácticas aplicadas
 

@@ -33,4 +33,8 @@ public class GeneradorDatosUnicos {
     public static String generarPassword() {
         return "Bonbonite#" + LocalDateTime.now().format(formatter);
     }
+
+    public static String generarTelefono() {
+        return "3" + String.valueOf(100000000 + random.nextInt(900000000));
+    }
 }
