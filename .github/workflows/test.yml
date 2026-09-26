@@ -51,6 +51,7 @@ jobs:
         env:
           SELENIUM_DRIVER: chrome
           SELENIUM_HEADLESS: true
+          webdriver.chrome.switches: "--headless,--disable-gpu,--no-sandbox,--disable-dev-shm-usage"
 
       - name: Upload test results
         if: always()
