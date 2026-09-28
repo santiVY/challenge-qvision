@@ -20,6 +20,8 @@ dependencies {
     testImplementation("net.serenity-bdd:serenity-screenplay-webdriver:$serenityVersion")
     testImplementation("net.serenity-bdd:serenity-cucumber:$serenityVersion")
     testImplementation("net.serenity-bdd:serenity-ensure:$serenityVersion")
+    testImplementation("org.slf4j:slf4j-api:2.0.13")
+    testImplementation("ch.qos.logback:logback-classic:1.5.6")
 
     // Cucumber + JUnit 5 Platform
     testImplementation("io.cucumber:cucumber-java:7.18.0")
@@ -42,7 +44,6 @@ tasks.test {
 
     testLogging {
         showStandardStreams = true
-        events("started", "passed", "skipped", "failed")
     }
 
     finalizedBy("aggregate")

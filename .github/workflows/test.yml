@@ -11,8 +11,20 @@ on:
 
 jobs:
   automation-tests:
-    name: Execute Automation Tests
+    name: Execute ${{ matrix.suite-name }} Tests
     runs-on: ubuntu-latest
+
+    # Declaramos la matriz para lanzar 3 servidores en paralelo completamente limpios
+    strategy:
+      fail-fast: false # Si un flujo falla, permite que los otros dos sigan ejecutándose con normalidad
+      matrix:
+        include:
+          - suite-name: "Compra"
+            runner-class: "**/compra/*TestSuite*"
+          - suite-name: "Registro"
+            runner-class: "**/registro/*TestSuite*"
+          - suite-name: "ActualizarDatos"
+            runner-class: "**/actualizardatos/*TestSuite*"
 
     steps:
       - name: Checkout repository
@@ -25,7 +37,6 @@ jobs:
           java-version: '21'
           cache: gradle
 
-      # Solo instalamos Chrome estable. Selenium se encargará del driver correcto.
       - name: Setup Chrome
         uses: browser-actions/setup-chrome@v1
         with:
@@ -35,18 +46,18 @@ jobs:
         run: chmod +x gradlew
 
       - name: Execute Serenity Tests
+        # Filtramos dinámicamente con '--tests' para correr solo el Runner correspondiente a esta máquina
         run: |
-          ./gradlew clean test aggregate --no-daemon
+          ./gradlew clean test aggregate --no-daemon \
+            --tests "${{ matrix.runner-class }}"
         env:
-          # Esta variable inyectará la bandera '--headless=new' nativamente en tu serenity.conf
           CHROME_HEADLESS_ARG: "--headless=new"
 
-
-      # Ajustado a la ruta correcta que definiste en tu serenity.conf (build/serenity)
+      # Corregido dinámicamente para subir los 3 reportes por separado sin pisarse
       - name: Upload Serenity Report
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: serenity-report
+          name: serenity-report-${{ matrix.suite-name }}
           path: target/site/serenity
           retention-days: 15
