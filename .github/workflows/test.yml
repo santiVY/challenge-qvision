@@ -28,7 +28,6 @@ jobs:
           - suite-name: "Registro"
             runner-class: "com.qvision.bonbonite.runners.registro.RegistroTestSuite"
 
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -51,12 +50,10 @@ jobs:
       - name: Execute Serenity Tests
         # Filtramos dinámicamente con '--tests' para correr solo el Runner correspondiente a esta máquina
         run: |
-          ./gradlew clean test aggregate --no-daemon \
-            --tests "${{ matrix.runner-class }}"
+          ./gradlew clean test --tests "${{ matrix.runner-class }}" aggregate --no-daemon
         env:
           CHROME_HEADLESS_ARG: "--headless=new"
 
-      # Corregido dinámicamente para subir los 3 reportes por separado sin pisarse
       - name: Upload Serenity Report
         if: always()
         uses: actions/upload-artifact@v4
