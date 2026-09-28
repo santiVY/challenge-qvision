@@ -36,10 +36,11 @@ jobs:
 
       - name: Execute Serenity Tests
         run: |
-          ./gradlew clean test aggregate \
-            -Ddriver=chrome \
-            -Dheadless.mode=true \
-            --no-daemon
+          ./gradlew clean test aggregate --no-daemon
+        env:
+          # Esta variable inyectará la bandera '--headless=new' nativamente en tu serenity.conf
+          CHROME_HEADLESS_ARG: "--headless=new"
+
 
       # Ajustado a la ruta correcta que definiste en tu serenity.conf (build/serenity)
       - name: Upload Serenity Report
