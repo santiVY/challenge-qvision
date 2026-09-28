@@ -5,26 +5,18 @@ on:
     branches:
       - develop
       - main
-
   pull_request:
     branches:
       - develop
       - main
-
   workflow_dispatch:
 
 jobs:
   automation-tests:
-
     name: Execute Automation Tests
     runs-on: ubuntu-latest
 
-    env:
-      webdriver.driver: chrome
-      webdriver.headless.mode: true
-
     steps:
-
       - name: Checkout repository
         uses: actions/checkout@v4
 
@@ -35,42 +27,27 @@ jobs:
           java-version: '21'
           cache: gradle
 
-      - name: Install Chrome
+      # Solo instalamos Chrome estable. Selenium se encargará del driver correcto.
+      - name: Setup Chrome
         uses: browser-actions/setup-chrome@v1
-
-      - name: Install ChromeDriver
-        uses: nanasess/setup-chromedriver@v2
-
-      - name: Display Java Version
-        run: java -version
+        with:
+          chrome-version: stable
 
       - name: Grant execute permission to Gradle Wrapper
         run: chmod +x gradlew
 
-      - name: Display Gradle Version
-        run: ./gradlew --version
-
       - name: Execute Serenity Tests
         run: |
           ./gradlew clean test aggregate \
-          -Ddriver=chrome \
-          -Dheadless.mode=true \
-          -Dwebdriver.chrome.driver=$(which chromedriver) \
-          -Dwebdriver.autodownload=false \
-          --no-daemon       
+            -Ddriver=chrome \
+            -Dheadless.mode=true \
+            --no-daemon
 
+      # Ajustado a la ruta correcta que definiste en tu serenity.conf (build/serenity)
       - name: Upload Serenity Report
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: serenity-report
           path: target/site/serenity
-          retention-days: 15
-
-      - name: Upload Screenshots
-        if: failure()
-        uses: actions/upload-artifact@v4
-        with:
-          name: serenity-screenshots
-          path: target/site/serenity/screenshots
           retention-days: 15
