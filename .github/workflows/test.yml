@@ -16,15 +16,18 @@ jobs:
 
     # Declaramos la matriz para lanzar 3 servidores en paralelo completamente limpios
     strategy:
-      fail-fast: false # Si un flujo falla, permite que los otros dos sigan ejecutándose con normalidad
+      fail-fast: false
       matrix:
         include:
           - suite-name: "Compra"
-            runner-class: "**/compra/*TestSuite*"
-          - suite-name: "Registro"
-            runner-class: "**/registro/*TestSuite*"
+            runner-class: "com.qvision.bonbonite.runners.compra.CompraTestSuite"
           - suite-name: "ActualizarDatos"
-            runner-class: "**/actualizardatos/*TestSuite*"
+            runner-class: "com.qvision.bonbonite.runners.actualizacion.ActualizarDatosTestSuite"
+          - suite-name: "IniciarSesion"
+            runner-class: "com.qvision.bonbonite.runners.iniciarsesion.IniciarSesionTestSuite"
+          - suite-name: "Registro"
+            runner-class: "com.qvision.bonbonite.runners.registro.RegistroTestSuite"
+
 
     steps:
       - name: Checkout repository
