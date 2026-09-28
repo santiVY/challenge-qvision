@@ -42,13 +42,6 @@ tasks.test {
 
     systemProperty("cucumber.junit-platform.naming-strategy", "long")
 
-    testLogging {
-        // Esto le dice a Gradle que muestre todo lo que se imprima en consola (System.out)
-        showStandardStreams = true
-        // Opcional: muestra eventos básicos en consola por si los necesitas
-        events("started", "passed", "skipped", "failed")
-    }
-
     // 2. Hace que al terminar 'test', se ejecute automáticamente el reporte de Serenity
     finalizedBy("aggregate")
 }
