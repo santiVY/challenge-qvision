@@ -35,6 +35,12 @@ jobs:
           java-version: '21'
           cache: gradle
 
+      - name: Install Chrome
+        uses: browser-actions/setup-chrome@v1
+
+      - name: Install ChromeDriver
+        uses: nanasess/setup-chromedriver@v2
+
       - name: Display Java Version
         run: java -version
 
@@ -49,6 +55,8 @@ jobs:
           ./gradlew clean test aggregate \
             -Dwebdriver.driver=chrome \
             -Dwebdriver.headless.mode=true \
+            -Dwebdriver.chrome.driver=$(which chromedriver) \
+            -Dwebdriver.autodownload=false \
             --no-daemon
         env:
           REQRES_API_KEY: ${{ secrets.REQRES_API_KEY }}
