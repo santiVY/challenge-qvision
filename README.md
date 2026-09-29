@@ -10,12 +10,13 @@ Este proyecto implementa un framework de automatización de pruebas robusto, man
 
 * **Java 21+** - Lenguaje de programación
 * **Gradle** - Herramienta de automatización de compilación
-* **Serenity BDD 4.2.0** - Framework de pruebas con patrón Screenplay
+* **Serenity BDD 4.2.26** - Framework de pruebas con patrón Screenplay
 * **Cucumber 7.18.0** - Desarrollo orientado al comportamiento (BDD)
 * **JUnit 5** - Framework para la ejecución de pruebas
-* **Selenium WebDriver 4.23.1** - Automatización del navegador
+* **Selenium WebDriver** - Automatización del navegador
 * **Google Chrome** - Navegador objetivo
-* **WebDriverManager 5.8.0** - Gestión de WebDriver
+* **SLF4J 2.0.13** - API de logging
+* **Logback 1.5.6** - Implementación de logging
 * **AssertJ** - Aserciones fluidas
 
 ## Arquitectura
@@ -82,6 +83,15 @@ src
         └── logback-test.xml         # Configuración de logs
 ```
 
+## Configuración
+
+La configuración del proyecto se centraliza en `src/test/resources/serenity.conf`:
+
+- **headless.mode dinámico**: La configuración usa la variable de entorno `CHROME_HEADLESS_ARG` para inyectar el flag `--headless=new` en GitHub Actions, mientras que en local se ejecuta con interfaz gráfica.
+- **Logging**: Configurado en modo VERBOSE con colores en consola para facilitar la depuración.
+- **Screenshots**: Se toman automáticamente en caso de fallos con nivel de detalle DETAILED.
+- **Base URL**: Configurada en `https://bon-bonite.com`
+
 ## Requisitos
 
 * Java 21 o superior
@@ -143,7 +153,7 @@ En Windows, reemplazar `./gradlew` por `gradlew.bat`.
 Después de ejecutar las pruebas, el reporte de Serenity BDD se genera en:
 
 ```text
-build/serenity/index.html
+target/site/serenity/index.html
 ```
 
 Abre este archivo en un navegador para visualizar el reporte detallado de las pruebas, incluyendo capturas de pantalla y logs de ejecución.
@@ -193,9 +203,13 @@ El proyecto incluye un workflow de GitHub Actions que ejecuta automáticamente l
 
 El workflow:
 - Configura Java 21
-- Ejecuta todas las pruebas con Gradle
-- Ejecuta Selenium en modo headless
-- Genera y sube los reportes de Serenity como artefactos
+- Instala Google Chrome en modo headless
+- Ejecuta los tests en paralelo usando una matriz para los 4 módulos:
+  - Compra
+  - ActualizarDatos
+  - IniciarSesion
+  - Registro
+- Genera y sube reportes de Serenity separados por módulo como artefactos
 
 Configuración ubicada en: `.github/workflows/test.yml`
 
