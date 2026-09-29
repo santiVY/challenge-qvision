@@ -1,7 +1,6 @@
 plugins {
     java
     idea
-    // 1. Plugin oficial para compilar el reporte visual "bonito" de Serenity
     id("net.serenity-bdd.serenity-gradle-plugin") version "4.2.26"
 }
 
@@ -21,6 +20,8 @@ dependencies {
     testImplementation("net.serenity-bdd:serenity-screenplay-webdriver:$serenityVersion")
     testImplementation("net.serenity-bdd:serenity-cucumber:$serenityVersion")
     testImplementation("net.serenity-bdd:serenity-ensure:$serenityVersion")
+    testImplementation("org.slf4j:slf4j-api:2.0.13")
+    testImplementation("ch.qos.logback:logback-classic:1.5.6")
 
     // Cucumber + JUnit 5 Platform
     testImplementation("io.cucumber:cucumber-java:7.18.0")
@@ -37,9 +38,14 @@ dependencies {
 tasks.test {
     useJUnitPlatform()
 
+    maxParallelForks = 1
+    systemProperty("cucumber.execution.parallel.enabled", "false")
     systemProperty("cucumber.junit-platform.naming-strategy", "long")
 
-    // 2. Hace que al terminar 'test', se ejecute automáticamente el reporte de Serenity
+    testLogging {
+        showStandardStreams = true
+    }
+
     finalizedBy("aggregate")
 }
 
