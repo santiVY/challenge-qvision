@@ -1,4 +1,4 @@
-Feature: Compra de un producto en Bon-Bonite
+Feature: Iniciar sesión en Bon-Bonite
 
   Como usuario registrado en Bon-Bonite
   Quiero iniciar sesion con mis credenciales

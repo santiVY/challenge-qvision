@@ -1,7 +1,7 @@
-Feature: Modificación de datos del usuario registrado
+Feature: Actualizar de datos del usuario registrado
 
   Como usuario registrado en Bon-Bonite
-  Quiero modificar mis datos personales en la sección "Mi cuenta"
+  Quiero actualizar mis datos personales en la sección "Mi cuenta"
   Para mantener mi información actualizada
 
   Background:
@@ -12,7 +12,7 @@ Feature: Modificación de datos del usuario registrado
       | password | 123456789  |
 
   @cuenta @smoke
-  Scenario: Modificación exitosa de los datos del usuario
+  Scenario: Actualizacion exitosa de los datos del usuario
     When el usuario accede a la seccion datos
     And el usuario actualiza su información de perfil con los siguientes datos
       | campo    | valor_nuevo |
