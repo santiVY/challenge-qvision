@@ -16,7 +16,7 @@ Feature: Compra de un producto en Bon-Bonite
     When el usuario navega al módulo "Zapatos"
     And el usuario realiza la compra de un producto disponible
       | campo        | valor          |
-      | talla        | 34             |
+      | talla        | 35             |
       | genero       | Mujer          |
       | telefono     | 3509003456     |
       | pais         | Colombia       |
