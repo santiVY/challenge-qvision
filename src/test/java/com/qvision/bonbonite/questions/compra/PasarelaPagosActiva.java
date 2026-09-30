@@ -3,6 +3,7 @@ package com.qvision.bonbonite.questions.compra;
 import com.qvision.bonbonite.ui.compra.PaginaPasarela;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Question;
+import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
 import net.serenitybdd.screenplay.questions.Visibility;
 import net.serenitybdd.screenplay.waits.WaitUntil;
 import org.openqa.selenium.WebDriver;
@@ -16,7 +17,7 @@ public class PasarelaPagosActiva implements Question<Boolean> {
 
     @Override
     public Boolean answeredBy(Actor actor) {
-        WebDriver driver = actor.usingAbilityTo(net.serenitybdd.screenplay.abilities.BrowseTheWeb.class).getDriver();
+        WebDriver driver = actor.usingAbilityTo(BrowseTheWeb.class).getDriver();
 
         actor.attemptsTo(
                 WaitUntil.the(PaginaPasarela.IFRAME_WOMPI, isVisible()).forNoMoreThan(10).seconds()
