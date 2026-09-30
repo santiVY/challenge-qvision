@@ -12,6 +12,8 @@ import net.serenitybdd.screenplay.actors.OnStage;
 
 import java.util.Map;
 
+import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
+
 public class CompraStepDefinitions {
 
     @When("el usuario navega al módulo {string}")
@@ -43,7 +45,7 @@ public class CompraStepDefinitions {
     @Then("el sistema debería ver la pasarela de pagos activa para la compra")
     public void elSistemaDeberíaVerLaPasarelaDePagosActivaParaLaCompra() {
         OnStage.theActorInTheSpotlight().should(
-                net.serenitybdd.screenplay.GivenWhenThen.seeThat("La pasarela de pagos con Nequi está activa",
+                seeThat("La pasarela de pagos con Nequi está activa",
                         PasarelaPagosActiva.conNequiDisponible())
         );
     }
