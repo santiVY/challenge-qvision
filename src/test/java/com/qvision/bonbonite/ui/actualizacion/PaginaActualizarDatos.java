@@ -4,13 +4,12 @@ import net.serenitybdd.screenplay.targets.Target;
 import org.openqa.selenium.By;
 
 public class PaginaActualizarDatos {
-    //elege de este target el primer elemento en la task
+
     public static final Target BOTON_ACTUALIZAR = Target.the("Botón actualizar información")
             .locatedBy("#profile-update-form button.update-info-btn");
 
     public static final Target TELEFONO = Target.the("Teléfono cliente").located(By.name("billing_phone"));
 
-    //elege de este target el primer elemento en la task
     public static final Target BOTON_GUARDAR= Target.the("Botón guardar información")
             .locatedBy("form#profile-update-form button.save-info-btn");
 
