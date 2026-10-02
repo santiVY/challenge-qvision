@@ -14,7 +14,7 @@ jobs:
     name: Execute ${{ matrix.suite-name }} Tests
     runs-on: ubuntu-latest
 
-    # Declaramos la matriz para lanzar 3 servidores en paralelo completamente limpios
+    # Declaramos la matriz para lanzar 4 servidores en paralelo completamente limpios
     strategy:
       fail-fast: false
       matrix:
